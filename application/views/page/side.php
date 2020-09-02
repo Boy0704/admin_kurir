@@ -28,15 +28,12 @@
         
         <?php if ($this->session->userdata('level') == 'admin'){ ?>
         <li><a href="app"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="Device"><i class="fa fa-keyboard-o"></i> <span>Master Device</span></a></li>
-        <li><a href="app/poe_out"><i class="fa fa-files-o"></i> <span>Manage PoE Out</span></a></li>
+        <li><a href="jenis_layanan"><i class="fa fa-keyboard-o"></i> <span>Master Jenis Layanan</span></a></li>
+        <li><a href="slider"><i class="fa fa-keyboard-o"></i> <span>Master Slider</span></a></li>
         
-        <li><a href="a_user"><i class="fa fa-users"></i> <span>Master User</span></a></li>
+        <li><a href="users"><i class="fa fa-users"></i> <span>Master User</span></a></li>
 
-        <?php } elseif ($this->session->userdata('level') == 'user') {?>
-
-         <li><a href="app"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="app/poe_out"><i class="fa fa-files-o"></i> <span>Manage PoE Out</span></a></li>
+        
 
         <?php } ?>
         
