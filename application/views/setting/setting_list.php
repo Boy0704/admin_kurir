@@ -1,7 +1,7 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('slider/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('setting/create'),'Create', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -11,7 +11,7 @@
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
-                <form action="<?php echo site_url('slider/index'); ?>" class="form-inline" method="get">
+                <form action="<?php echo site_url('setting/index'); ?>" class="form-inline" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
@@ -19,7 +19,7 @@
                                 if ($q <> '')
                                 {
                                     ?>
-                                    <a href="<?php echo site_url('slider'); ?>" class="btn btn-default">Reset</a>
+                                    <a href="<?php echo site_url('setting'); ?>" class="btn btn-default">Reset</a>
                                     <?php
                                 }
                             ?>
@@ -33,20 +33,22 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Image</th>
+		<th>Judul</th>
+		<th>Value</th>
 		<th>Action</th>
             </tr><?php
-            foreach ($slider_data as $slider)
+            foreach ($setting_data as $setting)
             {
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><img src="image/slider/<?php echo $slider->image?>" alt="" class="img-responsive"></td>
+			<td><?php echo $setting->judul ?></td>
+			<td><?php echo $setting->value ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('slider/update/'.$slider->id_slide),'<span class="label label-info">Ubah</span>'); 
+				echo anchor(site_url('setting/update/'.$setting->id_setting),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
-				echo anchor(site_url('slider/delete/'.$slider->id_slide),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('setting/delete/'.$setting->id_setting),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>

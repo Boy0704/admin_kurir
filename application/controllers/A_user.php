@@ -39,7 +39,7 @@ class A_user extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-            'judul_page' => 'a_user/a_user_list',
+            'judul_page' => 'Users List',
             'konten' => 'a_user/a_user_list',
         );
         $this->load->view('v_index', $data);
@@ -67,7 +67,7 @@ class A_user extends CI_Controller
     public function create() 
     {
         $data = array(
-            'judul_page' => 'a_user/a_user_form',
+            'judul_page' => 'Users/Create',
             'konten' => 'a_user/a_user_form',
             'button' => 'Create',
             'action' => site_url('a_user/create_action'),
@@ -77,10 +77,30 @@ class A_user extends CI_Controller
         'password' => set_value('password'),
         'level' => set_value('level'),
         'foto' => set_value('foto'),
+        'jenis_kendaraan' => set_value('jenis_kendaraan'),
+        'no_plat' => set_value('no_plat'),
+        'alamat' => set_value('alamat'),
     );
         $this->load->view('v_index', $data);
     }
     
+    public function create_driver()
+    {
+        $id_user=$this->input->post('id_user');
+        $jenis_kendaraan=$this->input->post('jenis_kendaraan');
+        $no_plat=$this->input->post('no_plat');
+        $alamat=$this->input->post('alamat');
+
+        $data=array(
+            'id_user'=>$id_user,
+            'jenis_kendaraan'=>$jenis_kendaraan,
+            'no_plat'=>$no_plat,
+            'alamat'=>$no_plat
+        );
+
+        $this->db->insert('data_driver',$data);
+    }
+
     public function create_action() 
     {
         $this->_rules();
@@ -92,12 +112,29 @@ class A_user extends CI_Controller
             $data = array(
         'nama_lengkap' => $this->input->post('nama_lengkap',TRUE),
         'username' => $this->input->post('username',TRUE),
-        'password' => md5($this->input->post('password',TRUE)),
+        'password' => $this->input->post('password',TRUE),
         'level' => $this->input->post('level',TRUE),
         'foto' => $img,
         );
 
-            $this->A_user_model->insert($data);
+        $this->A_user_model->insert($data);
+        $id_usernya=$this->db->query("select id_user from users order by id_user DESC")->row_array();
+        if($this->input->post('level')=="driver")
+        {
+        $id_user=$this->input->post('id_user');
+        $jenis_kendaraan=$this->input->post('jenis_kendaraan');
+        $no_plat=$this->input->post('no_plat');
+        $alamat=$this->input->post('alamat');
+
+        $data_driver=array(
+            'id_user'=>$id_usernya['id_user'],
+            'jenis_kendaraan'=>$jenis_kendaraan,
+            'no_plat'=>$no_plat,
+            'alamat'=>$alamat
+        );
+
+        $this->db->insert('data_driver',$data_driver);
+        }
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('a_user'));
         }
@@ -106,10 +143,10 @@ class A_user extends CI_Controller
     public function update($id) 
     {
         $row = $this->A_user_model->get_by_id($id);
-
+        $row_driver=$this->db->query("select * from data_driver where id_user='$id'")->row_array();
         if ($row) {
             $data = array(
-                'judul_page' => 'a_user/a_user_form',
+                'judul_page' => 'Users/Update',
                 'konten' => 'a_user/a_user_form',
                 'button' => 'Update',
                 'action' => site_url('a_user/update_action'),
@@ -119,6 +156,9 @@ class A_user extends CI_Controller
         'password' => set_value('password', $row->password),
         'level' => set_value('level', $row->level),
         'foto' => set_value('foto', $row->foto),
+        'jenis_kendaraan' => set_value('jenis_kendaraan',$row_driver['jenis_kendaraan']),
+        'no_plat' => set_value('no_plat',$row_driver['no_plat']),
+        'alamat' => set_value('alamat',$row_driver['alamat']),
         );
             $this->load->view('v_index', $data);
         } else {
@@ -130,19 +170,28 @@ class A_user extends CI_Controller
     public function update_action() 
     {
         $this->_rules();
-
+        $id=$this->input->post('id_user');
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id_user', TRUE));
         } else {
             $data = array(
         'nama_lengkap' => $this->input->post('nama_lengkap',TRUE),
         'username' => $this->input->post('username',TRUE),
-        'password' => $retVal = ($this->input->post('password') == '') ? $_POST['password_old'] : md5($this->input->post('password',TRUE)),
+        'password' => $retVal = ($this->input->post('password') == '') ? $_POST['password_old'] :$this->input->post('password',TRUE),
         'level' => $this->input->post('level',TRUE),
         'foto' => $retVal = ($_FILES['foto']['name'] == '') ? $_POST['foto_old'] : upload_gambar_biasa('user', 'image/user/', 'jpeg|png|jpg|gif', 10000, 'foto'),
         );
 
             $this->A_user_model->update($this->input->post('id_user', TRUE), $data);
+
+            if($this->input->post('level')=="driver")
+                {
+                    $jenis_kendaraan=$this->input->post('jenis_kendaraan');
+                    $no_plat=$this->input->post('no_plat');
+                    $alamat=$this->input->post('alamat');
+                    $this->db->query("update data_driver set jenis_kendaraan='$jenis_kendaraan',no_plat='$no_plat',alamat='$alamat' where id_user='$id'");
+                }
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('a_user'));
         }

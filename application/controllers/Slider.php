@@ -72,23 +72,38 @@ class Slider extends CI_Controller
 	);
         $this->load->view('v_index', $data);
     }
+
+
     
     public function create_action() 
     {
-        $this->_rules();
+        $this->load->library('upload');
+            $nmfile = $_FILES['image']['name'];
+            $config['upload_path']   = './image/slider';
+            $config['overwrite']     = true;
+            $config['allowed_types'] = 'gif|jpeg|png|jpg|bmp|PNG|JPEG|JPG';
+            $config['file_name'] = $nmfile;
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-		'image' => $this->input->post('image',TRUE),
-	    );
+            $this->upload->initialize($config);
 
-            $this->Slider_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('slider'));
+            if($_FILES['image']['name'])
+            {
+                if($this->upload->do_upload('image'))
+                {
+                $gbr = $this->upload->data();
+                $data = array(
+                  
+                    'image' =>  $gbr['file_name'],
+                   
+                );
+
+                $this->Slider_model->insert($data);
+                $this->session->set_flashdata('message', 'Create Record Success');
+                redirect(site_url('slider'));
+            }
         }
     }
+    
     
     public function update($id) 
     {
@@ -112,19 +127,46 @@ class Slider extends CI_Controller
     
     public function update_action() 
     {
-        $this->_rules();
+        $this->load->library('upload');
+        $nmfile = $_FILES['image']['name'];
+        $config['upload_path']   = './image/slider';
+        $config['overwrite']     = true;
+        $config['allowed_types'] = 'gif|jpeg|png|jpg|bmp|PNG|JPEG|JPG';
+        $config['file_name'] = $nmfile;
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_slide', TRUE));
-        } else {
-            $data = array(
-		'image' => $this->input->post('image',TRUE),
-	    );
+        $this->upload->initialize($config);
+        
+                if(!empty($_FILES['image']['name']))
+                {  
+                        if($_FILES['image']['name']==$this->input->post('image')){
+                            unlink("image/slider/".$this->input->post('image'));
+                        }
 
-            $this->Slider_model->update($this->input->post('id_slide', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('slider'));
-        }
+                    if($_FILES['image']['name'])
+                    {
+                        if($this->upload->do_upload('image'))
+                        {
+                            $gbr = $this->upload->data();
+                            $data = array(
+                                'image' => $gbr['file_name'],
+                            );
+                        }
+                    }
+                  
+                    $this->Slider_model->update($this->input->post('id_slide', TRUE), $data);
+                    $this->session->set_flashdata('message', 'Update Record Success');
+                    redirect(site_url('slider'));
+                }
+                    else
+                        {
+                            $data = array(
+                                'image' => $gbr['file_name'],
+                            );
+                        }
+                    
+                        $this->Slider_model->update($this->input->post('id_slide', TRUE), $data);
+                        $this->session->set_flashdata('message', 'Update Record Success');
+                        redirect(site_url('slider'));
     }
     
     public function delete($id) 
@@ -133,6 +175,8 @@ class Slider extends CI_Controller
 
         if ($row) {
             $this->Slider_model->delete($id);
+            unlink('./image/slider/'.$row->image);
+            
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('slider'));
         } else {
