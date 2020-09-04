@@ -452,6 +452,8 @@ class Api_kurir extends CI_Controller {
 	{
 		if ($_POST) {
 			$id_order = $this->input->post('id_order');
+			$customer = get_data('order','id_order',$id_order,'customer');
+			$nama_customer = get_data('users','id_user',$customer,'nama_lengkap');
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'2'));
 
@@ -478,6 +480,8 @@ class Api_kurir extends CI_Controller {
 	{
 		if ($_POST) {
 			$id_order = $this->input->post('id_order');
+			$customer = get_data('order','id_order',$id_order,'customer');
+			$nama_customer = get_data('users','id_user',$customer,'nama_lengkap');
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'4'));
 			// push notifikasi ke customer
