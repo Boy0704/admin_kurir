@@ -247,6 +247,7 @@ class Api_kurir extends CI_Controller {
 			$result = array();
 			$this->db->where('customer', $id_user);
 			$this->db->like('date_at', $tgl, 'after');
+			$this->db->order_by('id_order', 'desc');
 			$data = $this->db->get('order');
 
 			foreach ($data->result() as $rw) {
@@ -284,6 +285,7 @@ class Api_kurir extends CI_Controller {
 			$this->db->where('driver', $id_user);
 			$this->db->where('status !=', "4");
 			$this->db->like('date_at', $tgl, 'after');
+			$this->db->order_by('id_order', 'desc');
 			$data = $this->db->get('order');
 
 			foreach ($data->result() as $rw) {
