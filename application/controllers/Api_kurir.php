@@ -265,7 +265,7 @@ class Api_kurir extends CI_Controller {
 					$status = "Delivery";
 				} elseif ($rw->status == '3') {
 					$status = "Cancel";
-				} elseif ($rw->status == '3') {
+				} elseif ($rw->status == '4') {
 					$status = "Selesai";
 				}
 				array_push($result, array(
