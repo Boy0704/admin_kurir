@@ -211,6 +211,21 @@ class Api_kurir extends CI_Controller {
 		}
 	}
 
+	public function get_slider()
+	{
+		$req = $this->input->post('req');
+		$data = $this->db->get('slider', 3, 0);
+
+		foreach ($data->result() as $rw) {
+			
+			array_push($result, array(
+				'image' => $rw->image,
+		}
+
+		echo json_encode(array(
+			'detailnya' => $result
+		));
+	}
 
 	public function get_list_transaksi_user()
 	{
