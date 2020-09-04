@@ -43,7 +43,7 @@
         <div class="form-user-driver" id="form-user-driver">
             <div class="form-group">
                 <label for="varchar">Jenis Kendaraan</label>
-                <input type="text" class="form-control" name="jenis_kendaraan" id="jenis_kendaraan" placeholder="Jenis Kendaraan" value="<?php echo $jenis_kendaraan?>" />
+              
 
                 <select name="jenis_kendaraan" id="jenis_kendaraan" class="form-control">
                 <?php $select="";
