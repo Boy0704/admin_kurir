@@ -160,6 +160,15 @@ class Api_kurir extends CI_Controller {
 						data_driver 
 					HAVING distance <= $jarak_driver
 					 order by distance asc limit 1";
+			$data_driver = $this->db->query($sql);
+			if ($data_driver->num_rows() == 0) {
+				$result = array(
+					'status' => "0",
+					'pesan' => "Driver tidak dapat ditemukan di lokasi terdekat"
+				);
+				echo json_encode($result);
+				exit();
+			} 
 			$data_driver = $this->db->query($sql)->row();
 			$driver = $data_driver->id_user;
 			$jarak_driver = $data_driver->distance;
