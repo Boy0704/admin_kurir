@@ -158,7 +158,7 @@ class Api_kurir extends CI_Controller {
 						) AS distance 
 					FROM
 						data_driver 
-					WHERE distance <= $jarak_driver
+					HAVING distance <= $jarak_driver
 					 order by distance asc limit 1";
 			$data_driver = $this->db->query($sql)->row();
 			$driver = $data_driver->id_user;
