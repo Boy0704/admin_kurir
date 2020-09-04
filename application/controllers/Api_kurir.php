@@ -250,7 +250,7 @@ class Api_kurir extends CI_Controller {
 
 	public function get_list_transaksi_driver()
 	{
-		$id_user = "17";//$this->input->post('id_user');
+		$id_user = $this->input->post('id_user');
 			$tgl = date('Y-m-d');
 			$result = array();
 			$this->db->where('driver', $id_user);
