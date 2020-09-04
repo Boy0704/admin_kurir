@@ -221,7 +221,7 @@ class Api_kurir extends CI_Controller {
 			
 			array_push($result, array(
 				'image' => $rw->image,
-			);
+			));
 		}
 
 		echo json_encode(array(
