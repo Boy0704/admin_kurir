@@ -215,6 +215,7 @@ class Api_kurir extends CI_Controller {
 	{
 		$req = $this->input->post('req');
 		$data = $this->db->get('slider', 3, 0);
+		$result = array();
 
 		foreach ($data->result() as $rw) {
 			
