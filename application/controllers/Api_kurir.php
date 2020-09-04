@@ -331,9 +331,22 @@ class Api_kurir extends CI_Controller {
 	{
 		if ($_POST) {
 			$id_order = $this->input->post('id_order');
+			$customer = get_data('order','id_order',$id_order,'customer');
+			$nama_customer = get_data('users','id_user',$customer,'nama_lengkap');
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'1'));
 			if ($update) {
+
+				// push notifikasi ke customer
+				$server_key = get_setting('server_fcm_customer');
+				$token = get_data('users','id_user',$customer,'token_fcm');
+				$title = "Driver sedang menuju ke lokasi";
+				$body = "Hai $nama_customer, Driver sedang menuju ke lokasi";
+				$screen ="detail_trx";
+				$this->send_notif($server_key,$token,$title, $body, $screen);
+
+				// batas notifikasi
+
 				echo json_encode(array(
 					'status' => '1',
 					'pesan' => 'Driver menuju kelokasi jemput',
@@ -348,6 +361,17 @@ class Api_kurir extends CI_Controller {
 			$id_order = $this->input->post('id_order');
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'2'));
+
+			// push notifikasi ke customer
+			$server_key = get_setting('server_fcm_customer');
+			$token = get_data('users','id_user',$customer,'token_fcm');
+			$title = "Driver sedang antar paket kamu";
+			$body = "Hai $nama_customer, Driver sedang antar paket kamu";
+			$screen ="detail_trx";
+			$this->send_notif($server_key,$token,$title, $body, $screen);
+
+				// batas notifikasi
+
 			if ($update) {
 				echo json_encode(array(
 					'status' => '1',
@@ -363,6 +387,15 @@ class Api_kurir extends CI_Controller {
 			$id_order = $this->input->post('id_order');
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'4'));
+			// push notifikasi ke customer
+			$server_key = get_setting('server_fcm_customer');
+			$token = get_data('users','id_user',$customer,'token_fcm');
+			$title = "Driver sudah selesai mengantar paket kamu";
+			$body = "Hai $nama_customer, Driver sudah selesai mengantar paket kamu";
+			$screen ="detail_trx";
+			$this->send_notif($server_key,$token,$title, $body, $screen);
+
+				// batas notifikasi
 			if ($update) {
 				echo json_encode(array(
 					'status' => '1',
