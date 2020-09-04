@@ -29,7 +29,10 @@ function get_setting($judul)
 function get_data($tabel,$primary_key,$id,$select)
 {
 	$CI =& get_instance();
-	$data = $CI->db->query("SELECT $select FROM $tabel where $primary_key='$id' ")->row_array();
+	$CI->db->select($select);
+	$CI->db->where($primary_key, $id);
+	$data = $CI->db->get($tabel)->row_array();
+	//$data = $CI->db->query("SELECT $select FROM $tabel where $primary_key='$id' ")->row_array();
 	return $data[$select];
 }
 
