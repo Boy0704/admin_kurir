@@ -38,6 +38,7 @@
 		<th>Standar Km</th>
 		<th>Standar Harga</th>
 		<th>Per Km</th>
+		<th>Jarak Driver</th>
 		<th>Action</th>
             </tr><?php
             foreach ($setting_layanan_data as $setting_layanan)
@@ -51,6 +52,7 @@
 			<td><?php echo $setting_layanan->standar_km ?></td>
 			<td><?php echo $setting_layanan->standar_harga ?></td>
 			<td><?php echo $setting_layanan->per_km ?></td>
+			<td><?php echo $setting_layanan->jarak_driver ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('setting_layanan/update/'.$setting_layanan->id_setting_layanan),'<span class="label label-info">Ubah</span>'); 

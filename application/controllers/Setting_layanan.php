@@ -56,6 +56,7 @@ class Setting_layanan extends CI_Controller
 		'standar_km' => $row->standar_km,
 		'standar_harga' => $row->standar_harga,
 		'per_km' => $row->per_km,
+		'jarak_driver' => $row->jarak_driver,
 	    );
             $this->load->view('setting_layanan/setting_layanan_read', $data);
         } else {
@@ -77,6 +78,7 @@ class Setting_layanan extends CI_Controller
 	    'standar_km' => set_value('standar_km'),
 	    'standar_harga' => set_value('standar_harga'),
 	    'per_km' => set_value('per_km'),
+	    'jarak_driver' => set_value('jarak_driver'),
 	);
         $this->load->view('v_index', $data);
     }
@@ -94,6 +96,7 @@ class Setting_layanan extends CI_Controller
 		'standar_km' => $this->input->post('standar_km',TRUE),
 		'standar_harga' => $this->input->post('standar_harga',TRUE),
 		'per_km' => $this->input->post('per_km',TRUE),
+		'jarak_driver' => $this->input->post('jarak_driver',TRUE),
 	    );
 
             $this->Setting_layanan_model->insert($data);
@@ -117,7 +120,8 @@ class Setting_layanan extends CI_Controller
 		'max_km' => set_value('max_km', $row->max_km),
 		'standar_km' => set_value('standar_km', $row->standar_km),
 		'standar_harga' => set_value('standar_harga', $row->standar_harga),
-		'per_km' => set_value('per_km', $row->per_km),
+        'per_km' => set_value('per_km', $row->per_km),
+        'jarak_driver' => set_value('jarak_driver', $row->jarak_driver),
 	    );
             $this->load->view('v_index', $data);
         } else {
@@ -139,6 +143,7 @@ class Setting_layanan extends CI_Controller
 		'standar_km' => $this->input->post('standar_km',TRUE),
 		'standar_harga' => $this->input->post('standar_harga',TRUE),
 		'per_km' => $this->input->post('per_km',TRUE),
+		'jarak_driver' => $this->input->post('jarak_driver',TRUE),
 	    );
 
             $this->Setting_layanan_model->update($this->input->post('id_setting_layanan', TRUE), $data);
@@ -168,6 +173,7 @@ class Setting_layanan extends CI_Controller
 	$this->form_validation->set_rules('standar_km', 'standar km', 'trim|required');
 	$this->form_validation->set_rules('standar_harga', 'standar harga', 'trim|required');
 	$this->form_validation->set_rules('per_km', 'per km', 'trim|required');
+	$this->form_validation->set_rules('jarak_driver', 'jarak driver', 'trim|required');
 
 	$this->form_validation->set_rules('id_setting_layanan', 'id_setting_layanan', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

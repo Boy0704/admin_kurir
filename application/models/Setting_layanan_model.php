@@ -37,6 +37,7 @@ class Setting_layanan_model extends CI_Model
 	$this->db->or_like('standar_km', $q);
 	$this->db->or_like('standar_harga', $q);
 	$this->db->or_like('per_km', $q);
+	$this->db->or_like('jarak_driver', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -50,6 +51,7 @@ class Setting_layanan_model extends CI_Model
 	$this->db->or_like('standar_km', $q);
 	$this->db->or_like('standar_harga', $q);
 	$this->db->or_like('per_km', $q);
+	$this->db->or_like('jarak_driver', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

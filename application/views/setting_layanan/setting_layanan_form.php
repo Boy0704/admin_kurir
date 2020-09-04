@@ -36,6 +36,10 @@
             <label for="int">Per Km <?php echo form_error('per_km') ?></label>
             <input type="text" class="form-control" name="per_km" id="per_km" placeholder="Per Km" value="<?php echo $per_km; ?>" />
         </div>
+	    <div class="form-group">
+            <label for="int">Jarak Driver <?php echo form_error('jarak_driver') ?></label>
+            <input type="text" class="form-control" name="jarak_driver" id="jarak_driver" placeholder="Jarak Driver" value="<?php echo $jarak_driver; ?>" />
+        </div>
 	    <input type="hidden" name="id_setting_layanan" value="<?php echo $id_setting_layanan; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('setting_layanan') ?>" class="btn btn-default">Cancel</a>
