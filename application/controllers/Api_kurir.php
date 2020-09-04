@@ -355,6 +355,86 @@ class Api_kurir extends CI_Controller {
 		}
 	}
 
+	public function update_profil_driver()
+	{
+		if ($_POST) {
+			$id_user = $this->input->post('id_user');
+			$nama = $this->input->post('nama');
+			$email = $this->input->post('email');
+			$no_telp = $this->input->post('no_telp');
+			$password = $this->input->post('password');
+
+			$data = array();
+
+			if ($password != '') {
+				$data = array(
+					'nama_lengkap' => $nama,
+					'no_telp' => $no_telp,
+					'email' => $email,
+					'password' => $password
+				);
+			} else {
+				$data = array(
+					'nama_lengkap' => $nama,
+					'no_telp' => $no_telp,
+					'email' => $email,
+				);
+			}
+
+			$this->db->where('id_user', $id_user);
+			$update = $this->db->update('users', $data);
+			if ($update) {
+				echo json_encode(array(
+					'status' => '1',
+					'pesan' => 'Data berhasil di ubah',
+				));
+			}
+
+
+		}
+	}
+
+	public function update_profil_customer()
+	{
+		if ($_POST) {
+			$id_user = $this->input->post('id_user');
+			$nama = $this->input->post('nama');
+			$email = $this->input->post('email');
+			$no_telp = $this->input->post('no_telp');
+			$password = $this->input->post('password');
+
+			$data = array();
+
+			if ($password != '') {
+				$data = array(
+					'nama_lengkap' => $nama,
+					'no_telp' => $no_telp,
+					'username' => $no_telp,
+					'email' => $email,
+					'password' => $password
+				);
+			} else {
+				$data = array(
+					'nama_lengkap' => $nama,
+					'no_telp' => $no_telp,
+					'username' => $no_telp,
+					'email' => $email,
+				);
+			}
+
+			$this->db->where('id_user', $id_user);
+			$update = $this->db->update('users', $data);
+			if ($update) {
+				echo json_encode(array(
+					'status' => '1',
+					'pesan' => 'Data berhasil di ubah',
+				));
+			}
+
+
+		}
+	}
+
 	public function diantar()
 	{
 		if ($_POST) {
