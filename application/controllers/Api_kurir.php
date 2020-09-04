@@ -229,7 +229,7 @@ class Api_kurir extends CI_Controller {
 					$status = "Delivery";
 				} elseif ($rw->status == '3') {
 					$status = "Cancel";
-				} elseif ($rw->status == '3') {
+				} elseif ($rw->status == '4') {
 					$status = "Selesai";
 				}
 				array_push($result, array(
@@ -239,7 +239,7 @@ class Api_kurir extends CI_Controller {
 					'no_plat' => get_data('data_driver','id_user',$rw->driver,'no_plat'),
 					'nama_driver' => get_data('users','id_user',$rw->driver,'nama_lengkap'),
 					'ongkos' => "Rp. ".number_format($rw->harga),
-					'status' => $rw->status
+					'status' => $status
 				));
 			}
 
