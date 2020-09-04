@@ -146,6 +146,7 @@ class Api_kurir extends CI_Controller {
 			$nama_pengirim = $this->input->post('nama_pengirim');
 			$status = $this->input->post('status');
 			$id_jenis = $this->input->post('id_jenis');
+			$jarak_driver = get_data('setting_layanan','id_jenis',$id_jenis,'jarak_driver');
 
 			// cari driver terdekat
 			$sql = "SELECT
@@ -156,7 +157,8 @@ class Api_kurir extends CI_Controller {
 							) 
 						) AS distance 
 					FROM
-						data_driver
+						data_driver 
+					WHERE distance <= $jarak_driver
 					 order by distance asc limit 1";
 			$data_driver = $this->db->query($sql)->row();
 			$driver = $data_driver->id_user;
