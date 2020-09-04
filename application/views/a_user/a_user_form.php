@@ -44,6 +44,19 @@
             <div class="form-group">
                 <label for="varchar">Jenis Kendaraan</label>
                 <input type="text" class="form-control" name="jenis_kendaraan" id="jenis_kendaraan" placeholder="Jenis Kendaraan" value="<?php echo $jenis_kendaraan?>" />
+
+                <select name="jenis_kendaraan" id="jenis_kendaraan" class="form-control">
+                <?php $select="";
+                    if($jenis_kendaraan =="") {
+                        $select="Select";
+                    } else {
+                        $select= $jenis_kendaraan;
+                    }
+                ?>
+                <option value="<?=$jenis_kendaraan?>"><?php echo $select;?></option>
+                <option value="mobil">Mobil</option>
+                <option value="motor">Motor</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="varchar">No Plat</label>

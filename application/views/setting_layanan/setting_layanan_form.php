@@ -3,7 +3,17 @@
 	    <div class="form-group">
             <label for="text">Id Jenis <?php echo form_error('id_jenis') ?></label>
             <select name="id_jenis" id="id_jenis" class="form-control">
-                <option value="<?php echo $id_jenis?>">Select</option>
+                <?php 
+                $select="";
+                    if($id_jenis==""){
+                        $select="Select";
+                    } else {
+                        $s=$this->db->query("SELECT * FROM jenis_layanan where id_jenis='$id_jenis'")->row_array();
+                        $select = $s['id_jenis']." | ".$s['jenis_layanan'];
+                    }
+                
+                ?>
+                <option value="<?php echo $id_jenis?>"><?php echo $select?></option>
                 <?php $data_jenis_layanan=$this->db->query("SELECT * from jenis_layanan")->result();?>
                 <?php foreach($data_jenis_layanan as $d):?>
                  <option value="<?=$d->id_jenis?>"><?=$d->id_jenis?> | <?=$d->jenis_layanan?></option>

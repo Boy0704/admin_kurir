@@ -137,10 +137,8 @@ class Slider extends CI_Controller
         $this->upload->initialize($config);
         
                 if(!empty($_FILES['image']['name']))
-                {  
-                        if($_FILES['image']['name']==$this->input->post('image')){
-                            unlink("image/slider/".$this->input->post('image'));
-                        }
+                {
+                        unlink("image/slider/".$this->input->post('image'));
 
                     if($_FILES['image']['name'])
                     {
