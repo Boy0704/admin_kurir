@@ -254,6 +254,7 @@ class Api_kurir extends CI_Controller {
 			$tgl = date('Y-m-d');
 			$result = array();
 			$this->db->where('driver', $id_user);
+			$this->db->where('status !=', "4");
 			$this->db->like('date_at', $tgl, 'after');
 			$data = $this->db->get('order');
 
