@@ -104,14 +104,14 @@ class Api_kurir extends CI_Controller {
 					$result = array(
 						'status' => "1",
 						'pesan' => "success",
-						'total_harga' => $total_harga,
+						'total_harga' => "$total_harga",
 					);
 					echo json_encode($result);
 				} else {
 					$result = array(
 						'status' => "1",
 						'pesan' => "success",
-						'total_harga' => $cek->standar_harga,
+						'total_harga' => "$cek->standar_harga",
 					);
 					echo json_encode($result);
 				}
