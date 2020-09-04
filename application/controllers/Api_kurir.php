@@ -337,9 +337,8 @@ class Api_kurir extends CI_Controller {
 			$nama_customer = get_data('users','id_user',$customer,'nama_lengkap');
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'1'));
-			if ($update) {
-
-				// push notifikasi ke customer
+			
+			// push notifikasi ke customer
 				$server_key = get_setting('server_fcm_customer');
 				$token = get_data('users','id_user',$customer,'token_fcm');
 				$title = "Driver sedang menuju ke lokasi";
@@ -348,6 +347,9 @@ class Api_kurir extends CI_Controller {
 				$this->send_notif($server_key,$token,$title, $body, $screen);
 
 				// batas notifikasi
+			if ($update) {
+
+				
 
 				echo json_encode(array(
 					'status' => '1',
