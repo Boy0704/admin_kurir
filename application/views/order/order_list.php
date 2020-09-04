@@ -74,13 +74,13 @@
 			<td><?php echo $order->nama_pengirim ?></td>
 			<td>
                 <?php if($order->status=="1"){
-                    echo "Open";
+                    echo "<b>Open</b>";
                 } else if($order->status=="2"){
-                    echo "Delivery";
+                    echo "<b>Delivery</b>";
                 } else if($order->status=="3"){
-                    echo "Cancel";
+                    echo "<b>Cancel</>";
                 } else{
-                    echo "Success/Done";  
+                    echo "<span class='label label-success'>Success/Done</span>";  
                 }
                 ?>
             </td>
