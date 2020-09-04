@@ -44,7 +44,7 @@
                             <h1><strong>Aplikasi </strong> Admin Kurir</h1>
                             <div class="description">
                                 <p>
-                                    Power by dari <a href="https://jualkoding.com"><strong>Jualkoding.com</strong></a>
+                                    Power by dari <a href="#"><strong>G2teknologi </strong></a>
                                 </p>
                             </div>
                         </div>
