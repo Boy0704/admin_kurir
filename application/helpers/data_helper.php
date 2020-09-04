@@ -33,7 +33,27 @@ function get_data($tabel,$primary_key,$id,$select)
 	return $data[$select];
 }
 
-
+function upload_gambar_biasa($nama_gambar, $lokasi_gambar, $tipe_gambar, $ukuran_gambar, $name_file_form)
+{
+    $CI =& get_instance();
+    $nmfile = $nama_gambar."_".time();
+    $config['upload_path'] = './'.$lokasi_gambar;
+    $config['allowed_types'] = $tipe_gambar;
+    $config['max_size'] = $ukuran_gambar;
+    $config['file_name'] = $nmfile;
+    // load library upload
+    $CI->load->library('upload', $config);
+    // upload gambar 1
+    if ( ! $CI->upload->do_upload($name_file_form)) {
+    	return $CI->upload->display_errors();
+    } else {
+	    $result1 = $CI->upload->data();
+	    $result = array('gambar'=>$result1);
+	    $dfile = $result['gambar']['file_name'];
+	    
+	    return $dfile;
+	}	
+}
 
 
 
