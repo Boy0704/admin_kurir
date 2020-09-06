@@ -579,13 +579,13 @@ class Api_kurir extends CI_Controller {
 		if ($http_code == 200) {
 		  # http code === 200 berarti request sukses (harap pastikan server penerima mengirimkan http_code 200 jika berhasil)
 		  // echo $resp;
-			$send = '{"notification": {"body": "'.$body.'","title": "'.$title.'"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "sound": "default", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}';
+			$send = '{"notification": {"body": "'.$body.'","title": "'.$title.'","sound": "default","badge" => "1"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}';
 			$this->db->insert('log_notif', array('log'=>$send,'resp'=>$resp));
 		} else {
 		  # selain itu request gagal (contoh: error 404 page not found)
 		  // echo 'Error HTTP Code : '.$http_code."\n";
 		  // echo $resp;
-			$send = '{"notification": {"body": "'.$body.'","title": "'.$title.'"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "sound": "default", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}';
+			$send = '{"notification": {"body": "'.$body.'","title": "'.$title.'","sound": "default","badge" => "1"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}';
 			$this->db->insert('log_notif', array('log'=>$send,'resp'=>$resp));
 		}
 		} else {
