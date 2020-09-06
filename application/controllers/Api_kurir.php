@@ -563,7 +563,7 @@ class Api_kurir extends CI_Controller {
 		CURLOPT_CONNECTTIMEOUT => 60, # set connection timeout ke 60 detik, untuk mencegah request gantung saat server mati
 		CURLOPT_TIMEOUT => 60, # set timeout ke 120 detik, untuk mencegah request gantung saat server hang
 		CURLOPT_POST => 1, # set method request menjadi POST
-		CURLOPT_POSTFIELDS => '{"notification": {"body": "'.$body.'","title": "'.$title.'"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "sound": "default", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}', # attached post data dalam bentuk JSON String,
+		CURLOPT_POSTFIELDS => '{"notification": {"body": "'.$body.'","title": "'.$title.'","sound": "default","badge" => "1"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}', # attached post data dalam bentuk JSON String,
 		// CURLOPT_VERBOSE => 1, # mode debug
 		// CURLOPT_HEADER => 1, # cetak header
 		CURLOPT_SSL_VERIFYPEER => true  
