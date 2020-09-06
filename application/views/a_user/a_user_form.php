@@ -25,7 +25,6 @@
                 <option value="<?php echo $level ?>"><?php echo $level ?></option>
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
-                <option value="driver">Driver</option>
             </select>
         </div>
         <div class="form-group">

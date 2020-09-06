@@ -1,7 +1,7 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('promotion/create'),'Create', 'class="btn btn-primary"'); ?>
+                <!-- <?php echo anchor(site_url('data_driver/create'),'Create', 'class="btn btn-primary"'); ?> -->
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -11,7 +11,7 @@
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
-                <form action="<?php echo site_url('promotion/index'); ?>" class="form-inline" method="get">
+                <form action="<?php echo site_url('data_driver/index'); ?>" class="form-inline" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
@@ -19,7 +19,7 @@
                                 if ($q <> '')
                                 {
                                     ?>
-                                    <a href="<?php echo site_url('promotion'); ?>" class="btn btn-default">Reset</a>
+                                    <a href="<?php echo site_url('data_driver'); ?>" class="btn btn-default">Reset</a>
                                     <?php
                                 }
                             ?>
@@ -33,32 +33,55 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Image</th>
+		<th>Nama Lengkap</th>
+		<th>Username</th>
+		<th>Jenis Kendaraan</th>
+		<th>No Plat</th>
+		<th>Alamat</th>
 		<th>Status</th>
 		<th>Action</th>
             </tr><?php
-            foreach ($promotion_data as $promotion)
+            foreach ($data_driver_data as $data_driver)
             {
+                $dataUserLengkap=$this->db->query("SELECT * FROM users where id_user='$data_driver->id_user'")->row_array();
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><img src="image/<?=$promotion->image?>" alt="<?php echo $promotion->image ?>" width="200px"></td>
+			<td><?php echo $dataUserLengkap['nama_lengkap'] ?></td>
+			<td><?php echo $dataUserLengkap['username'] ?></td>
+			<td><?php echo $data_driver->jenis_kendaraan ?></td>
+			<td><?php echo $data_driver->no_plat ?></td>
+			<td><?php echo $data_driver->alamat ?></td>
 			<td>
-                <?php if($promotion->status=="1"){
-                echo "Aktif";
+                <?php if($data_driver->status=='1'){
+                    echo "Aktif";
                 } else {
                     echo "Tidak aktif";
                 }    
                 ?>
+               
             </td>
-
-			<td style="text-align:center" width="200px">
+            <?php if($data_driver->status=='1'){?>
+                <td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('promotion/update/'.$promotion->id_promotion),'<span class="label label-info">Ubah</span>'); 
+				echo anchor(site_url('data_driver/update/'.$data_driver->id_user),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
-				echo anchor(site_url('promotion/delete/'.$promotion->id_promotion),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('data_driver/delete/'.$data_driver->id_user),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
+
+            <?php } else { ?>
+                <td style="text-align:center" width="200px">
+				<?php 
+				echo anchor(site_url('data_driver/confirm/'.$data_driver->id_user),'<span class="label label-success">Confirm</span>'); 
+				echo ' | '; 
+				echo anchor(site_url('data_driver/update/'.$data_driver->id_user),'<span class="label label-info">Ubah</span>'); 
+				echo ' | '; 
+				echo anchor(site_url('data_driver/delete/'.$data_driver->id_user),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				?>
+			</td>
+              <?php } ?>
+			
 		</tr>
                 <?php
             }

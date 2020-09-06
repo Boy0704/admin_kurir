@@ -80,7 +80,7 @@ class Promotion extends CI_Controller
     {
         $this->load->library('upload');
             $nmfile = $_FILES['image']['name'];
-            $config['upload_path']   = './image/promo';
+            $config['upload_path']   = './image';
             $config['overwrite']     = true;
             $config['allowed_types'] = 'gif|jpeg|png|jpg|bmp|PNG|JPEG|JPG';
             $config['file_name'] = $nmfile;
@@ -132,7 +132,7 @@ class Promotion extends CI_Controller
     {
         $this->load->library('upload');
         $nmfile = $_FILES['image']['name'];
-        $config['upload_path']   = './image/promo';
+        $config['upload_path']   = './image';
         $config['overwrite']     = true;
         $config['allowed_types'] = 'gif|jpeg|png|jpg|bmp|PNG|JPEG|JPG';
         $config['file_name'] = $nmfile;
@@ -141,7 +141,7 @@ class Promotion extends CI_Controller
         
                 if(!empty($_FILES['image']['name']))
                 {
-                        unlink("image/promo/".$this->input->post('image'));
+                        unlink("image/".$this->input->post('image'));
 
                     if($_FILES['image']['name'])
                     {

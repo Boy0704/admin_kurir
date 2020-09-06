@@ -34,7 +34,7 @@
         <li><a href="promotion"><i class="fa fa-database"></i> <span>Master Promosi</span></a></li>
         <li><a href="slider"><i class="fa fa-image"></i> <span>Master Slider</span></a></li>
         <li><a href="a_user"><i class="fa fa-users"></i> <span>Master User</span></a></li>
-        <li><a href="a_user"><i class="fa fa-users"></i> <span>Master Driver</span></a></li>
+        <li><a href="data_driver"><i class="fa fa-users"></i> <span>Master Driver</span></a></li>
         <li><a href="order"><i class="fa fa-first-order"></i> <span>Order</span></a></li>
 
         
