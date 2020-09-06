@@ -42,7 +42,7 @@
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><img src="image/<?=$promotion->image?>" alt="<?php echo $promotion->image ?>" width="200px"></td>
+			<td><img src="image/promo/<?=$promotion->image?>" alt="<?php echo $promotion->image ?>" width="200px"></td>
 			<td>
                 <?php if($promotion->status=="1"){
                 echo "Aktif";
