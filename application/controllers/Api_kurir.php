@@ -61,6 +61,70 @@ class Api_kurir extends CI_Controller {
 		}
 	}
 
+	public function cek_username_driver()
+	{
+		if ($_POST) {
+			$username = $this->input->post('username');
+			$cek = $this->db->get_where('users', array('username'=>$username));
+			if ($cek->num_rows() > 0) {
+				$result = array(
+					'status' => "0",
+					'pesan' => 'Username Sudah terdaftar !'
+				);
+				echo json_encode($result);
+			}
+		}
+	}
+
+	public function daftar_driver()
+	{
+		if ($_POST) {
+			$nama = $this->input->post('nama');
+			$username = $this->input->post('username');
+			$no_telp = $this->input->post('no_telp');
+			$password = $this->input->post('password');
+			$email = $this->input->post('email');
+			$jenis_kendaraan = $this->input->post('jenis_kendaraan');
+			$no_plat = $this->input->post('no_plat');
+			$alamat = $this->input->post('alamat');
+
+
+			$simpan = $this->db->insert('users', array(
+				'nama_lengkap' => $nama,
+				'username' => $username,
+				'password' => $password,
+				'no_telp' => $no_telp,
+				'email' => $email,
+				'level' => 'driver'
+			));
+
+			$id_user = $this->db->insert_id();
+
+			$data_driver = array(
+				'id_user' => $id_user,
+				'jenis_kendaraan' => $this->input->post('jenis_kendaraan'),
+				'no_plat' => $this->input->post('no_plat'),
+				'alamat' => $this->input->post('alamat'),
+			)
+
+			if ($simpan) {
+				$result = array(
+					'status' => "1",
+					'pesan' => 'Pendaftaran berhasil, silahkan login'
+				);
+				echo json_encode($result);
+			} else {
+				$result = array(
+					'status' => "0",
+					'pesan' => 'Gagal'
+				);
+				echo json_encode($result);
+			}
+
+			
+		}
+	}
+
 	public function login()
 	{
 		if ($_POST) {
