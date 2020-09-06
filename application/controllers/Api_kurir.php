@@ -3,7 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api_kurir extends CI_Controller {
 
-	
+	public function tes_fcm()
+	{
+		$server_key = get_setting('server_fcm_customer');
+		$token = get_data('users','id_user',"23",'token_fcm');
+		$title = "Tes Aja";
+		$body = "Hai Ini Tes";
+		$screen ="list_trx";
+		$this->send_notif($server_key,$token,$title, $body, $screen);
+	}
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -301,9 +309,10 @@ class Api_kurir extends CI_Controller {
 			$tgl = date('Y-m-d');
 			$result = array();
 			$this->db->where('driver', $id_user);
-			$this->db->where('status !=', "4");
+			// $this->db->where('status !=', "4");
 			$this->db->like('date_at', $tgl, 'after');
 			$this->db->order_by('id_order', 'desc');
+			$this->db->order_by('status', 'asc');
 			$data = $this->db->get('order');
 
 			foreach ($data->result() as $rw) {
