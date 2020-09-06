@@ -31,8 +31,10 @@
         <li><a href="jenis_layanan"><i class="fa fa-database"></i> <span>Master Jenis Layanan</span></a></li>
         <li><a href="setting"><i class="fa fa-database"></i> <span>Master Setting Aplikasi</span></a></li>
         <li><a href="setting_layanan"><i class="fa fa-database"></i> <span>Master Setting Layanan</span></a></li>
+        <li><a href="promotion"><i class="fa fa-database"></i> <span>Master Promosi</span></a></li>
         <li><a href="slider"><i class="fa fa-image"></i> <span>Master Slider</span></a></li>
         <li><a href="a_user"><i class="fa fa-users"></i> <span>Master User</span></a></li>
+        <li><a href="a_user"><i class="fa fa-users"></i> <span>Master Driver</span></a></li>
         <li><a href="order"><i class="fa fa-first-order"></i> <span>Order</span></a></li>
 
         

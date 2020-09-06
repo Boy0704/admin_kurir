@@ -89,6 +89,24 @@ class Api_kurir extends CI_Controller {
 		}
 	}
 
+	public function get_promotion()
+	{
+		$req = $this->input->post('request');
+		$data = $this->db->get_where('promotion',array('status'=>'1'));
+		$result = array();
+
+		foreach ($data->result() as $rw) {
+			
+			array_push($result, array(
+				'image' => $rw->image,
+			));
+		}
+
+		echo json_encode(array(
+			'detailPromo' => $result
+		));
+	}
+
 	public function cek_jarak()
 	{
 		if ($_POST) {
