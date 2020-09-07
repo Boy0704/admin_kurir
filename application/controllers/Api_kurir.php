@@ -128,6 +128,12 @@ class Api_kurir extends CI_Controller {
 					'pesan' => 'Username Sudah terdaftar !'
 				);
 				echo json_encode($result);
+			} else {
+				$result = array(
+					'status' => "1",
+					'pesan' => 'Username Bisa digunakan !'
+				);
+				echo json_encode($result);
 			}
 		}
 	}
