@@ -168,8 +168,9 @@ class Api_kurir extends CI_Controller {
 				'no_plat' => $this->input->post('no_plat'),
 				'alamat' => $this->input->post('alamat'),
 			);
+			$simpan_driver = $this->db->insert('data_driver', $data_driver);
 
-			if ($simpan) {
+			if ($simpan_driver) {
 				$result = array(
 					'status' => "1",
 					'pesan' => 'Pendaftaran berhasil, silahkan login'
