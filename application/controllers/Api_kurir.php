@@ -17,6 +17,62 @@ class Api_kurir extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
+	public function all_lokasi_driver()
+	{
+		// Start XML file, create parent node
+		// $doc = domxml_new_doc("1.0");
+		// $node = $doc->create_element("markers");
+		// $parnode = $doc->append_child($node);
+
+		// header("Content-type: text/xml");
+		// $data = $this->db->get('data_driver');
+		// foreach ($data->result_array() as $row) {
+		// 	// Add to XML document node
+		//   $node = $doc->create_element("marker");
+		//   $newnode = $parnode->append_child($node);
+
+		//   $newnode->set_attribute("id", $row['id_user']);
+		//   $newnode->set_attribute("host", $row['no_plat']);
+		//   $newnode->set_attribute("active", "motor");
+		//   $newnode->set_attribute("lastupdate", get_waktu());
+		//   $newnode->set_attribute("lat", $row['lat']);
+		//   $newnode->set_attribute("lng", $row['lng']);
+
+		// }
+
+		// $xmlfile = $doc->dump_mem();
+		// echo $xmlfile;
+		$data = $this->db->get('data_driver');
+		$attribs=array('id_user','no_plat','jenis_kendaraan','lat','lng');
+
+
+	    $dom=new DOMDocument('1.0','utf-8');
+	    $dom->formatOutput=true;
+	    $dom->standalone=true;
+	    $dom->recover=true;
+
+	    $root=$dom->createElement('markers');
+	    $dom->appendChild( $root );
+
+
+	    foreach ($data->result() as $rs) {
+	    	$node=$dom->createElement('marker');
+	        $root->appendChild( $node );
+
+	        foreach( $attribs as $attrib ){
+	            $attr = $dom->createAttribute( $attrib );
+	            $value= $dom->createTextNode( $rs->$attrib );
+	            $attr->appendChild( $value );
+	            $node->appendChild( $attr );
+	        }
+	    }
+
+	    header("Content-Type: application/xml");
+	    echo $dom->saveXML();
+
+
+	}
+
 	public function daftar()
 	{
 		if ($_POST) {
