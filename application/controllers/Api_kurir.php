@@ -200,6 +200,18 @@ class Api_kurir extends CI_Controller {
 
 			if ($cek->num_rows() == 1) {
 				$data = $cek->row();
+
+				//cek driver aktif
+				$aktif_driver = $this->db->get_where('data_driver', array('id_user'=>$data->id_user))->row()->status;
+				if ($aktif_driver == '0') {
+					$result = array(
+						'status' => "0",
+						'pesan' => 'Akun kamu belum aktif, silahkan hubungi admin'
+					);
+					echo json_encode($result);
+					exit();
+				}
+
 				// update fcm token
 				$this->db->where('id_user', $data->id_user);
 				$this->db->update('users', array('token_fcm'=>$token_fcm));
