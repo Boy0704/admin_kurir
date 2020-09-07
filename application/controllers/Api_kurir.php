@@ -105,7 +105,7 @@ class Api_kurir extends CI_Controller {
 				'jenis_kendaraan' => $this->input->post('jenis_kendaraan'),
 				'no_plat' => $this->input->post('no_plat'),
 				'alamat' => $this->input->post('alamat'),
-			)
+			);
 
 			if ($simpan) {
 				$result = array(
