@@ -57,8 +57,11 @@
                 map : map,
                 position : point,
                 // label: type,
-                rotation : bearing,
-                icon : "<?php echo base_url() ?>image/logo_motor.png"
+                
+                icon : {
+                    path: "<?php echo base_url() ?>image/logo_motor.png",
+                    rotation : bearing
+                }
             });
             //store marker object in a new array
             markersArray.push(marker);
