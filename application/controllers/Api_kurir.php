@@ -501,8 +501,13 @@ class Api_kurir extends CI_Controller {
 			$id_user = $this->input->post('id_user');
 			$lat = $this->input->post('lat');
 			$lng = $this->input->post('lng');
+			$bearing = $this->input->post('bearing');
 			$this->db->where('id_user', $id_user);
-			$update = $this->db->update('data_driver', array('lat'=>$lat,'lng'=>$lng));
+			$update = $this->db->update('data_driver', array(
+				'lat'=>$lat,
+				'lng'=>$lng,
+				'bearing'=>$bearing
+			));
 			if ($update) {
 				echo json_encode(array(
 					'status' => '1',
