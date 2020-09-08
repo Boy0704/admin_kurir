@@ -460,8 +460,10 @@ class Api_kurir extends CI_Controller {
 
 			foreach ($data->result() as $rw) {
 				$status = '';
-				if ($rw->status == '1') {
+				if ($rw->status == '0') {
 					$status = "Open";
+				} elseif ($rw->status == '1') {
+					$status = "Sedang Menjemput";
 				} elseif ($rw->status == '2') {
 					$status = "Delivery";
 				} elseif ($rw->status == '3') {
