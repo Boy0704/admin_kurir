@@ -311,7 +311,7 @@ class Api_kurir extends CI_Controller {
 			$telp_pengirim = $this->input->post('telp_pengirim');
 			$nama_penerima = $this->input->post('nama_penerima');
 			$nama_pengirim = $this->input->post('nama_pengirim');
-			$status = $this->input->post('status');
+			$status = "0"; // 0 = open
 			$id_jenis = $this->input->post('id_jenis');
 			$jarak_driver = get_data('setting_layanan','id_jenis',$id_jenis,'jarak_driver');
 
