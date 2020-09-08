@@ -55,7 +55,8 @@
             var marker = new google.maps.Marker({
                 map : map,
                 position : point,
-                label: type,
+                // label: type,
+                icon : "<?php echo base_url() ?>image/logo_motor.png"
             });
             //store marker object in a new array
             markersArray.push(marker);
