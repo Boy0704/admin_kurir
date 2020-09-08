@@ -47,6 +47,7 @@
         for(var i = 0; i < markers.length; i++) {
             var host = markers[i].getAttribute("no_plat");
             var type = markers[i].getAttribute("jenis_kendaraan");
+            var bearing = markers[i].getAttribute("bearing");
             var lastupdate = "<?php echo get_waktu() ?>"; //markers[i].getAttribute("lastupdate");
             var point = new google.maps.LatLng(parseFloat(markers[i].getAttribute("lat")), parseFloat(markers[i].getAttribute("lng")));
             var html = "<b>" + "Host: </b>" + host + "<br>" + "<b>Last Updated: </b>" + lastupdate + "<br>";
@@ -56,6 +57,7 @@
                 map : map,
                 position : point,
                 // label: type,
+                rotation : bearing,
                 icon : "<?php echo base_url() ?>image/logo_motor.png"
             });
             //store marker object in a new array
