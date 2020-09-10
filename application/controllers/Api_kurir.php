@@ -294,6 +294,14 @@ class Api_kurir extends CI_Controller {
 
 	}
 
+	public function set_status_driver()
+	{
+		$update = $this->db->query("UPDATE data_driver SET status_online='0'");
+		if ($update) {
+			echo "berhasil update";
+		}
+	}
+
 	public function order()
 	{
 		if ($_POST) {
@@ -325,6 +333,7 @@ class Api_kurir extends CI_Controller {
 						) AS distance 
 					FROM
 						data_driver 
+					WHERE status_online='1'
 					HAVING distance <= $jarak_driver
 					 order by distance asc limit 1";
 			$data_driver = $this->db->query($sql);
@@ -506,7 +515,8 @@ class Api_kurir extends CI_Controller {
 			$update = $this->db->update('data_driver', array(
 				'lat'=>$lat,
 				'lng'=>$lng,
-				'bearing'=>$bearing
+				'bearing'=>$bearing,
+				'status_online' => '1'
 			));
 			if ($update) {
 				echo json_encode(array(
