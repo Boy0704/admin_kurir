@@ -12,7 +12,7 @@ class Login extends CI_Controller {
 	public function aksi_login()
 	{
 			$username = $this->input->post('username');
-			$password = md5($this->input->post('password'));
+			$password = $this->input->post('password');
 
 			// $hashed = '$2y$10$LO9IzV0KAbocIBLQdgy.oeNDFSpRidTCjXSQPK45ZLI9890g242SG';
 			$cek_user = $this->db->query("SELECT * FROM users WHERE username='$username' and password='$password' ");
