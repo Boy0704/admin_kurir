@@ -24,6 +24,7 @@
             <select name="level" id="level" class="form-control">
                 <option value="<?php echo $level ?>"><?php echo $level ?></option>
                 <option value="admin">Admin</option>
+                <option value="operator">Operator</option>
                 <option value="user">User</option>
             </select>
         </div>
