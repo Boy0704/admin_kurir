@@ -39,7 +39,7 @@ class A_user_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->where_in('level',array('admin','user'));
+        $this->db->where_in('level',array('admin','user','operator'));
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
