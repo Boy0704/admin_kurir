@@ -32,6 +32,33 @@ class App extends CI_Controller {
     {
         $this->load->view('data_driver/lokasi_driver');
     }
+
+    public function update_profil()
+    {
+        if ($this->session->userdata('level') == '') {
+                redirect('login');
+            }
+        if ($_POST) {
+            $data = array(
+                'nama_lengkap' => $this->input->post('nama_lengkap',TRUE),
+                'username' => $this->input->post('username',TRUE),
+                'password' => $retVal = ($this->input->post('password') == '') ? $_POST['password_old'] :$this->input->post('password',TRUE),
+                'email' => $this->input->post('email',TRUE),
+                'no_telp' => $this->input->post('no_telp',TRUE),
+                'foto' => $retVal = ($_FILES['foto']['name'] == '') ? $_POST['foto_old'] : upload_gambar_biasa('user', 'image/user/', 'jpeg|png|jpg|gif', 10000, 'foto'),
+            );
+
+            $this->db->where('id_user', $this->session->userdata('id_user'));
+            $this->db->update('users', $data);
+        } else {
+
+            $data = array(
+                'konten' => 'edit_profil',
+                'judul_page' => 'Update Profil',
+            );
+            $this->load->view('v_index', $data);
+        }
+    }
    
 	
 }
