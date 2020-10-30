@@ -4,7 +4,7 @@ $rw = $this->db->get_where('users', array('id_user'=>$id))->row();
  ?>
 <div class="row">
 	<div class="col-md-12">
-		<form action="" method="POST">
+		<form action="" method="POST" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>Nama Lengkap</label>
 				<input type="text" name="nama_lengkap" class="form-control" value="<?php echo $rw->nama_lengkap ?>">
