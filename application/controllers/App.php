@@ -49,7 +49,11 @@ class App extends CI_Controller {
             );
 
             $this->db->where('id_user', $this->session->userdata('id_user'));
-            $this->db->update('users', $data);
+            $update = $this->db->update('users', $data);
+            if ($update) {
+                $this->session->set_flashdata('message', alert_biasa('Profil berhasil di update','success'));
+                redirect('app/update_profil','refresh');
+            }
         } else {
 
             $data = array(
