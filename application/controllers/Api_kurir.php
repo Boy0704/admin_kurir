@@ -297,8 +297,8 @@ class Api_kurir extends CI_Controller {
 	public function set_status_driver()
 	{
 		if ($_GET) {
-			$id = $this->input->get('id_driver');
-			$update = $this->db->query("UPDATE data_driver SET status_online='0' WHERE id_driver='$id'");
+			$id = $this->input->get('id_user');
+			$update = $this->db->query("UPDATE data_driver SET status_online='0' WHERE id_user='$id'");
 			if ($update) {
 				echo "berhasil update $id";
 			}
