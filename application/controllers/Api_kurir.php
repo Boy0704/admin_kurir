@@ -75,7 +75,7 @@ class Api_kurir extends CI_Controller {
 
 	public function lokasi_driver()
 	{
-		$data = $this->db->query("SELECT * FROM data_driver WHERE lat !='' and lng !='' ");
+		$data = $this->db->query("SELECT * FROM data_driver WHERE lat !='' and lng !='' and bearing!='' ");
 		$result = array();
 
 		foreach ($data->result() as $rw) {
