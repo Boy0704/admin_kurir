@@ -73,6 +73,25 @@ class Api_kurir extends CI_Controller {
 
 	}
 
+	public function lokasi_driver()
+	{
+		$data = $this->db->query("SELECT * FROM data_driver WHERE lat != NULL and lng != NULL ");
+		$result = array();
+
+		foreach ($data->result() as $rw) {
+			
+			array_push($result, array(
+				'lat' => $rw->lat,
+				'lng' => $rw->lng,
+				'bearing' => $rw->bearing,
+			));
+		}
+
+		echo json_encode(array(
+			'detailnya' => $result
+		));
+	}
+
 	public function daftar()
 	{
 		if ($_POST) {
