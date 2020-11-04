@@ -43,7 +43,7 @@ class Api_kurir extends CI_Controller {
 		// $xmlfile = $doc->dump_mem();
 		// echo $xmlfile;
 		$data = $this->db->get('data_driver');
-		$attribs=array('id_user','no_plat','jenis_kendaraan','lat','lng','bearing');
+		$attribs=array('id_user','no_plat','jenis_kendaraan','lat','lng','bearing','status_online');
 
 
 	    $dom=new DOMDocument('1.0','utf-8');
