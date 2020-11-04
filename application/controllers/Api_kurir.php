@@ -81,6 +81,7 @@ class Api_kurir extends CI_Controller {
 		foreach ($data->result() as $rw) {
 			
 			array_push($result, array(
+				'id_user'=>$rw->id_user,
 				'lat' => $rw->lat,
 				'lng' => $rw->lng,
 				'bearing' => $rw->bearing,
