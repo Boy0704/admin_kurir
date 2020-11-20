@@ -75,22 +75,33 @@ class Api_kurir extends CI_Controller {
 
 	public function lokasi_driver()
 	{
-		$data = $this->db->query("SELECT * FROM data_driver WHERE lat !='' and lng !='' and bearing!='' ");
+		$data = $this->db->query("SELECT * FROM data_driver WHERE lat !='' and lng !='' and bearing!='' and status_online='1' ");
 		$result = array();
 
-		foreach ($data->result() as $rw) {
+		if ($data->num_rows() > 0) {
+			foreach ($data->result() as $rw) {
 			
-			array_push($result, array(
-				'id_user'=>$rw->id_user,
-				'lat' => $rw->lat,
-				'lng' => $rw->lng,
-				'bearing' => $rw->bearing,
+				array_push($result, array(
+					'id_user'=>$rw->id_user,
+					'lat' => $rw->lat,
+					'lng' => $rw->lng,
+					'no_plat' => $rw->no_plat,
+					'bearing' => $rw->bearing,
+				));
+			}
+
+			echo json_encode(array(
+				'status_error' => '0',
+				'detailnya' => $result
+			));
+		} else {
+			echo json_encode(array(
+				'status_error' => '1',
+				'detailnya' => $result
 			));
 		}
 
-		echo json_encode(array(
-			'detailnya' => $result
-		));
+		
 	}
 
 	public function daftar()
