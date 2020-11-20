@@ -1,9 +1,6 @@
 
         <form action="<?php echo $action; ?>" method="post">
-	    <div class="form-group">
-            <label for="int">Id User <?php echo form_error('id_user') ?></label>
-            <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Id User" value="<?php echo $id_user; ?>" />
-        </div>
+	    
 	    <div class="form-group">
             <label for="int">Nama Lengkap <?php echo form_error('id_user') ?></label>
             <input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap" placeholder="Nama Lengkap" value="<?php echo $nama_lengkap; ?>" />
@@ -11,6 +8,9 @@
 	    <div class="form-group">
             <label for="int">Username <?php echo form_error('id_user') ?></label>
             <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?php echo $username; ?>" />
+            <p>
+                *) Sesuaikan password dengan No Telp Driver
+            </p>
         </div>
 	    <div class="form-group">
             <label for="int">Password <?php echo form_error('id_user') ?></label>
@@ -42,7 +42,7 @@
                 } 
             }
             ?>
-            <option value="<?$status?>" selected><?php echo $state?></option>
+            <option value="<?php echo $status ?>" selected><?php echo $state?></option>
             <option value="1">Aktif</option>
             <option value="0">Tidak aktif</option>
             </select>

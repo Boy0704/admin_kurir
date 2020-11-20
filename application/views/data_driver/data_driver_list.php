@@ -38,7 +38,7 @@
 		<th>Jenis Kendaraan</th>
 		<th>No Plat</th>
 		<th>Alamat</th>
-		<th>Status</th>
+		<th>Status Online</th>
 		<th>Action</th>
             </tr><?php
             foreach ($data_driver_data as $data_driver)
@@ -53,12 +53,11 @@
 			<td><?php echo $data_driver->no_plat ?></td>
 			<td><?php echo $data_driver->alamat ?></td>
 			<td>
-                <?php if($data_driver->status=='1'){
-                    echo "Aktif";
-                } else {
-                    echo "Tidak aktif";
-                }    
-                ?>
+                <?php if ($data_driver->status_online=='1'): ?>
+                    <i class="fa fa-circle text-success"></i> Online
+                <?php else: ?>
+                    <i class="fa fa-circle text-danger"></i> Offline
+                <?php endif ?>
                
             </td>
             <?php if($data_driver->status=='1'){?>

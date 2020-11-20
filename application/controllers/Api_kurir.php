@@ -173,9 +173,9 @@ class Api_kurir extends CI_Controller {
 
 			$simpan = $this->db->insert('users', array(
 				'nama_lengkap' => $nama,
-				'username' => $no_telp,
+				'username' => $username,
 				'password' => $password,
-				'no_telp' => $no_telp,
+				'no_telp' => $username,
 				'email' => $email,
 				'level' => 'driver'
 			));

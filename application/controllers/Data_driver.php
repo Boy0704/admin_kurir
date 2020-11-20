@@ -156,6 +156,13 @@ class Data_driver extends CI_Controller
 	    );
 
             $this->Data_driver_model->update($this->input->post('id_user', TRUE), $data);
+
+            $this->db->where('id_user', $this->input->post('id_user'));
+            $this->db->update('users', array(
+                'username' => $this->input->post('username'),
+                'password' => $this->input->post('password'),
+            ));
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('data_driver'));
         }
@@ -213,6 +220,9 @@ class Data_driver extends CI_Controller
     public function delete($id) 
     {
         $row = $this->Data_driver_model->get_by_id($id);
+
+        $this->db->where('id_user', $id);
+        $this->db->delete('users');
 
         if ($row) {
             $this->Data_driver_model->delete($id);
