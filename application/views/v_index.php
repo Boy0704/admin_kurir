@@ -1,3 +1,8 @@
+<?php 
+if ($this->session->userdata('level') == '') {
+    redirect('login');
+}
+ ?>
 <!DOCTYPE html>
 <html>
 <head>

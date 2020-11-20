@@ -30,7 +30,8 @@
             </div>
         </div>
         <div class="table-responsive">
-        <table class="table table-bordered" style="margin-bottom: 10px">
+        <table class="table table-bordered" style="margin-bottom: 10px" id="example1">
+            <thead>
             <tr>
                 <th>No</th>
         <th>Nama Lengkap</th>
@@ -39,8 +40,12 @@
         <th>Foto</th>
       
         <th>Action</th>
-            </tr><?php
-            foreach ($a_user_data as $a_user)
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            $a_user_data = $this->db->get('users');
+            foreach ($a_user_data->result() as $a_user)
             {
                 ?>
                 <tr>
@@ -60,14 +65,15 @@
                 <?php
             }
             ?>
+            </tbody>
         </table>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-6">
                 <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
         </div>
             <div class="col-md-6 text-right">
                 <?php echo $pagination ?>
             </div>
-        </div>
+        </div> -->
     
