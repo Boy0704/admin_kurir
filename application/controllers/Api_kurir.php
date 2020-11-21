@@ -104,6 +104,35 @@ class Api_kurir extends CI_Controller {
 		
 	}
 
+	public function lacak_driver($id_user_driver)
+	{
+		$data = $this->db->query("SELECT * FROM data_driver WHERE lat !='' and lng !='' and bearing!='' and id_user='$id_user_driver' and status_online='1' ");
+		$result = array();
+
+		if ($data->num_rows() > 0) {
+			foreach ($data->result() as $rw) {
+			
+				array_push($result, array(
+					'id_user'=>$rw->id_user,
+					'lat' => $rw->lat,
+					'lng' => $rw->lng,
+					'no_plat' => $rw->no_plat,
+					'bearing' => $rw->bearing,
+				));
+			}
+
+			echo json_encode(array(
+				'status_error' => '0',
+				'detailnya' => $result
+			));
+		} else {
+			echo json_encode(array(
+				'status_error' => '1',
+				'detailnya' => $result
+			));
+		}
+	}
+
 	public function daftar()
 	{
 		if ($_POST) {
