@@ -507,9 +507,19 @@ class Api_kurir extends CI_Controller {
 				} elseif ($rw->status == '4') {
 					$status = "Selesai";
 				}
+
+				$origin = explode(',', $rw->origin);
+				$destination = explode(',', $rw->destination);
+
+
+
 				array_push($result, array(
 					'id_user_driver' => $rw->driver,
 					'id_order' => $rw->id_order,
+					'lat_origin' => $origin[0],
+					'lng_origin' => $origin[1],
+					'lat_destination' => $destination[0],
+					'lng_destination' => $destination[1],
 					'no_trx' =>'TR'.$rw->id_order,
 					'jemput' => $rw->alamat_origin,
 					'antar' => $rw->alamat_destination,
