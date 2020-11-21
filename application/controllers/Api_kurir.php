@@ -75,7 +75,7 @@ class Api_kurir extends CI_Controller {
 
 	public function lokasi_driver()
 	{
-		$data = $this->db->query("SELECT * FROM data_driver WHERE lat !='' and lng !='' and bearing!='' ");
+		$data = $this->db->query("SELECT * FROM data_driver WHERE lat !='' and lng !='' and bearing!='' and status_online = '1' ");
 		$result = array();
 
 		if ($data->num_rows() > 0) {
@@ -479,6 +479,7 @@ class Api_kurir extends CI_Controller {
 					$status = "Selesai";
 				}
 				array_push($result, array(
+					'id_order' => $rw->id_order,
 					'no_trx' =>'TR'.$rw->id_order,
 					'jemput' => $rw->alamat_origin,
 					'antar' => $rw->alamat_destination,
@@ -492,6 +493,35 @@ class Api_kurir extends CI_Controller {
 			echo json_encode(array(
 				'detailnya' => $result
 			));
+	}
+
+	public function batalkan_order()
+	{
+		if ($_POST) {
+			$id_order = $this->input->post('id_order');
+
+			$status = get_data('order','id_order',$id_order,'status');
+			if ($status == '1' || $status == '2') {
+				echo "order tidak bisa di batalkan karna sedang dalam proses";
+				exit();
+			}
+
+			$this->db->where('id_order', $id_order);
+			$update = $this->db->update('order', array('status'=>'3'));
+			if ($update) {
+				$driver = get_data('order','id_order',$id_order,'driver');
+				$server_key = get_setting('server_fcm_driver');
+				$token = get_data('users','id_user',$driver,'token_fcm');
+				$title = "Order dibatalkan";
+				$body = "Hai Driver, order telah dibatalkan pelanggan";
+				$screen ="list_trx";
+				$this->send_notif($server_key,$token,$title, $body, $screen);
+
+				echo "Order kamu berhasil di batalkan";
+			} else {
+				echo "ada kesalahan server";
+			}
+		}
 	}
 
 	public function get_list_transaksi_driver()
