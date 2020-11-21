@@ -508,6 +508,7 @@ class Api_kurir extends CI_Controller {
 					$status = "Selesai";
 				}
 				array_push($result, array(
+					'id_user_driver' => $rw->driver,
 					'id_order' => $rw->id_order,
 					'no_trx' =>'TR'.$rw->id_order,
 					'jemput' => $rw->alamat_origin,
