@@ -42,6 +42,7 @@ class Api_kurir extends CI_Controller {
 
 		// $xmlfile = $doc->dump_mem();
 		// echo $xmlfile;
+		$this->db->where('status_online', '1');
 		$data = $this->db->get('data_driver');
 		$attribs=array('id_user','no_plat','jenis_kendaraan','lat','lng','bearing','status_online');
 
