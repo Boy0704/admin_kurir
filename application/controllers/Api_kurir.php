@@ -402,7 +402,7 @@ class Api_kurir extends CI_Controller {
 						) AS distance 
 					FROM
 						data_driver 
-					WHERE status_online='1'
+					WHERE status_online='1' AND status_order='0'
 					HAVING distance <= $jarak_driver
 					 order by distance asc limit 1";
 			$data_driver = $this->db->query($sql);
@@ -437,6 +437,8 @@ class Api_kurir extends CI_Controller {
 
 			);
 			$simpan = $this->db->insert('order', $data);
+			$this->db->where('id_user', $driver);
+			$this->db->update('data_driver', array('status_order'=>'1'));
 			if ($simpan) {
 				// push notifikasi ke driver
 				$server_key = get_setting('server_fcm_driver');
@@ -542,13 +544,17 @@ class Api_kurir extends CI_Controller {
 			$id_order = $this->input->post('id_order');
 
 			$status = get_data('order','id_order',$id_order,'status');
+			$driver = get_data('order','id_order',$id_order,'driver');
 			if ($status == '1' || $status == '2') {
+				
 				echo "order tidak bisa di batalkan karna sedang dalam proses";
 				exit();
 			}
 
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'3'));
+			$this->db->where('id_user', $driver);
+			$this->db->update('data_driver', array('status_order'=>'0'));
 			if ($update) {
 				$driver = get_data('order','id_order',$id_order,'driver');
 				$server_key = get_setting('server_fcm_driver');
@@ -781,8 +787,12 @@ class Api_kurir extends CI_Controller {
 			$id_order = $this->input->post('id_order');
 			$customer = get_data('order','id_order',$id_order,'customer');
 			$nama_customer = get_data('users','id_user',$customer,'nama_lengkap');
+			$id_driver  = get_data('order','id_order',$id_order,'driver');
 			$this->db->where('id_order', $id_order);
 			$update = $this->db->update('order', array('status'=>'4'));
+
+			$this->db->where('id_user', $id_driver);
+			$this->db->update('data_driver', array('status_order'=>'0'));
 			// push notifikasi ke customer
 			$server_key = get_setting('server_fcm_customer');
 			$token = get_data('users','id_user',$customer,'token_fcm');
