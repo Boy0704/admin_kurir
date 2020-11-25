@@ -371,6 +371,18 @@ class Api_kurir extends CI_Controller {
 		}
 	}
 
+	public function set_online_driver()
+	{
+		if ($_POST) {
+			$id = $this->input->post('id_user');
+			$update = $this->db->query("UPDATE data_driver SET status_online='1' WHERE id_user='$id'");
+			if ($update) {
+				echo "berhasil update online $id";
+			}
+			exit();
+		}
+	}
+
 	public function order()
 	{
 		if ($_POST) {
