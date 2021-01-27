@@ -74,7 +74,7 @@
 			<td><?php echo $order->nama_pengirim ?></td>
 			<td>
                 <?php if($order->status=="0"){
-                    echo "<b></b>";
+                    echo "<b>Open</b>";
                 } else if($order->status=="1"){
                     echo "<b>Sedang Menjemput</b>";
                 } else if($order->status=="2"){
