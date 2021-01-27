@@ -38,6 +38,7 @@
 		<th>Jenis Kendaraan</th>
 		<th>No Plat</th>
 		<th>Alamat</th>
+        <th>Status</th>
 		<th>Status Online</th>
 		<th>Action</th>
             </tr><?php
@@ -52,6 +53,14 @@
 			<td><?php echo $data_driver->jenis_kendaraan ?></td>
 			<td><?php echo $data_driver->no_plat ?></td>
 			<td><?php echo $data_driver->alamat ?></td>
+            <td>
+                <?php if ($data_driver->status_order=='1'): ?>
+                    <span class="label label-success">Sedang ambil order</span>
+                <?php else: ?>
+                    <span class="label label-info">tidak ada order</span>
+                <?php endif ?>
+               
+            </td>
 			<td>
                 <?php if ($data_driver->status_online=='1'): ?>
                     <i class="fa fa-circle text-success"></i> Online
