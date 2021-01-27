@@ -79,7 +79,9 @@
                     echo "<b>Delivery</b>";
                 } else if($order->status=="3"){
                     echo "<b>Cancel</>";
-                } else{
+                } else if($order->status=="0"){
+                    echo "<b>Menunggu dibuka</>";
+                } else if($order->status == "4"){
                     echo "<span class='label label-success'>Success/Done</span>";  
                 }
                 ?>
