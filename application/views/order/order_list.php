@@ -73,14 +73,14 @@
 			<td><?php echo $order->nama_penerima ?></td>
 			<td><?php echo $order->nama_pengirim ?></td>
 			<td>
-                <?php if($order->status=="1"){
-                    echo "<b>Open</b>";
+                <?php if($order->status=="0"){
+                    echo "<b></b>";
+                } else if($order->status=="1"){
+                    echo "<b>Sedang Menjemput</b>";
                 } else if($order->status=="2"){
-                    echo "<b>Delivery</b>";
+                    echo "<b>Delivery</>";
                 } else if($order->status=="3"){
                     echo "<b>Cancel</>";
-                } else if($order->status=="0"){
-                    echo "<b>Menunggu dibuka</>";
                 } else if($order->status == "4"){
                     echo "<span class='label label-success'>Success/Done</span>";  
                 }
