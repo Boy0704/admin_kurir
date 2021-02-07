@@ -10,7 +10,14 @@ class Api_kurir extends CI_Controller {
 		$title = "Tes Aja";
 		$body = "Hai Ini Tes";
 		$screen ="list_trx";
-		$this->send_notif($server_key,$token,$title, $body, $screen);
+		$hasil = $this->send_notif($server_key,$token,$title, $body, $screen);
+		$result = json_decode($hasil);
+		if ($result->success == 1) {
+			echo "berhasil";
+		} else {
+			echo "gagal";
+		}
+
 	}
 	public function index()
 	{
@@ -448,19 +455,26 @@ class Api_kurir extends CI_Controller {
 				'date_at' => get_waktu()
 
 			);
-			$simpan = $this->db->insert('order', $data);
-			$this->db->where('id_user', $driver);
-			$this->db->update('data_driver', array('status_order'=>'1'));
-			if ($simpan) {
-				// push notifikasi ke driver
-				$server_key = get_setting('server_fcm_driver');
-				$token = get_data('users','id_user',$driver,'token_fcm');
-				$title = "Ada Order Masuk";
-				$body = "Hai Driver, ambil order kamu sekarang";
-				$screen ="list_trx";
-				$this->send_notif($server_key,$token,$title, $body, $screen);
 
-				// batas notifikasi
+			// push notifikasi ke driver
+			$server_key = get_setting('server_fcm_driver');
+			$token = get_data('users','id_user',$driver,'token_fcm');
+			$title = "Ada Order Masuk";
+			$body = "Hai Driver, ambil order kamu sekarang";
+			$screen ="list_trx";
+			$hasil = $this->send_notif($server_key,$token,$title, $body, $screen);
+			$result = json_decode($hasil);
+
+
+
+			// batas notifikasi
+			
+			if ($result->success == 1) {
+
+				$simpan = $this->db->insert('order', $data);
+				$this->db->where('id_user', $driver);
+				$this->db->update('data_driver', array('status_order'=>'1'));
+				
 
 				$result = array(
 					'status' => "1",
@@ -471,7 +485,7 @@ class Api_kurir extends CI_Controller {
 			} else {
 				$result = array(
 					'status' => "0",
-					'pesan' => "ada kesalahan sistem"
+					'pesan' => "driver tidak ditemukan atau sedang tidak bekerja"
 				);
 				echo json_encode($result);
 			}
@@ -870,15 +884,17 @@ class Api_kurir extends CI_Controller {
 		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		if ($http_code == 200) {
 		  # http code === 200 berarti request sukses (harap pastikan server penerima mengirimkan http_code 200 jika berhasil)
-		  // echo $resp;
+		//   return $resp;
 			$send = '{"notification": {"body": "'.$body.'","title": "'.$title.'","sound": "default","badge":"1"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}';
 			$this->db->insert('log_notif', array('log'=>$send,'resp'=>$resp));
+			return $resp;
 		} else {
 		  # selain itu request gagal (contoh: error 404 page not found)
 		  // echo 'Error HTTP Code : '.$http_code."\n";
-		  // echo $resp;
+		  
 			$send = '{"notification": {"body": "'.$body.'","title": "'.$title.'","sound": "default","badge":"1"}, "priority": "high", "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "screen": "'.$screen.'", "status": "done"}, "to": "'.$token.'"}';
 			$this->db->insert('log_notif', array('log'=>$send,'resp'=>$resp));
+			return $resp;
 		}
 		} else {
 		# jika curl error (contoh: request timeout)
