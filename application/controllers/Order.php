@@ -21,7 +21,7 @@ class Order extends CI_Controller
         $this->load->view('v_index', $data);
     }
 
-    public function cancel_order($id_order)
+    public function cancel_order($id_order,$driver)
     {
         $this->db->where('id_order', $id_order);
         $update = $this->db->update('order', array('status'=>'3'));

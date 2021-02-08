@@ -80,7 +80,7 @@
 			<td><?php echo $order->date_at ?></td>
             <td>
                 <?php if ($order->status == '1' or $order->status == '2'): ?>
-                    <a onclick="javasciprt: return confirm('Are You Sure ?')" href="order/cancel_order/<?php echo $order->id_order ?>" class="label label-danger">Cancel</a>
+                    <a onclick="javasciprt: return confirm('Are You Sure ?')" href="order/cancel_order/<?php echo $order->id_order.'/'.$order->driver ?>" class="label label-danger">Cancel</a>
                 <?php endif ?>
             </td>
 			<!-- <td style="text-align:center" width="200px">
