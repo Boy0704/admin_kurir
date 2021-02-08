@@ -519,7 +519,7 @@ class Api_kurir extends CI_Controller {
 	public function get_list_transaksi_user()
 	{
 		$id_user = $this->input->post('id_user');
-			$tgl = date('Y-m-d');
+			$tgl = date('Y-m');
 			$result = array();
 			$this->db->where('customer', $id_user);
 			$this->db->like('date_at', $tgl, 'after');
@@ -603,7 +603,7 @@ class Api_kurir extends CI_Controller {
 	public function get_list_transaksi_driver()
 	{
 		$id_user = $this->input->post('id_user');
-			$tgl = date('Y-m-d');
+			$tgl = date('Y-m');
 			$result = array();
 			$this->db->where('driver', $id_user);
 			// $this->db->where('status !=', "4");
