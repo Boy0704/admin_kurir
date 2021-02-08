@@ -6,7 +6,7 @@ class Api_kurir extends CI_Controller {
 	public function tes_fcm()
 	{
 		$server_key = get_setting('server_fcm_customer');
-		$token = get_data('users','id_user',"23",'token_fcm');
+		$token = get_data('users','id_user',"210",'token_fcm');
 		$title = "Tes Aja";
 		$body = "Hai Ini Tes";
 		$screen ="list_trx";
@@ -473,7 +473,10 @@ class Api_kurir extends CI_Controller {
 
 				$simpan = $this->db->insert('order', $data);
 				$this->db->where('id_user', $driver);
-				$this->db->update('data_driver', array('status_order'=>'1'));
+				$this->db->update('data_driver', array(
+					'status_order'=>'1',
+					'id_order' => $this->db->insert_id()
+				));
 				
 
 				$result = array(
