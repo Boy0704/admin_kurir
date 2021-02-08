@@ -71,6 +71,7 @@
             </td>
             <?php if($data_driver->status=='1'){?>
                 <td style="text-align:center" width="200px">
+                <a href="order/log_order_driver/<?php echo $data_driver->id_user ?>" class="label label-primary">Log Order</a>
 				<?php 
 				echo anchor(site_url('data_driver/update/'.$data_driver->id_user),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
