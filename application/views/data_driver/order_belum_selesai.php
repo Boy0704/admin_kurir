@@ -18,6 +18,7 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
+                <th>No TRX</th>
 		<th>Customer</th>
 		<th>Driver</th>
 		<th>Origin</th>
@@ -49,6 +50,7 @@
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
+            <td><?php echo "TR".$order->id_order ?></td>
 			<td><?php echo $data_user['nama_lengkap'] ?></td>
 			<td><?php echo $data_driver['nama_lengkap']  ?></td>
 			<td><?php echo $order->origin ?></td>
