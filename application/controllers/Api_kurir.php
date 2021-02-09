@@ -456,42 +456,46 @@ class Api_kurir extends CI_Controller {
 
 			);
 
-			// push notifikasi ke driver
-			$server_key = get_setting('server_fcm_driver');
-			$token = get_data('users','id_user',$driver,'token_fcm');
-			$title = "Ada Order Masuk";
-			$body = "Hai Driver, ambil order kamu sekarang";
-			$screen ="list_trx";
-			$hasil = $this->send_notif($server_key,$token,$title, $body, $screen);
-			$result = json_decode($hasil);
-
-
-
-			// batas notifikasi
 			
-			if ($result->success == 1) {
+			$this->db->trans_begin();
 
-				$simpan = $this->db->insert('order', $data);
-				$this->db->where('id_user', $driver);
-				$this->db->update('data_driver', array(
-					'status_order'=>'1',
-					'id_order' => $this->db->insert_id()
-				));
-				
+			$simpan = $this->db->insert('order', $data);
+			$this->db->where('id_user', $driver);
+			$this->db->update('data_driver', array(
+				'status_order'=>'1',
+				'id_order' => $this->db->insert_id()
+			));
 
-				$result = array(
+			if ($this->db->trans_status() === FALSE)
+			{
+		        $this->db->trans_rollback();
+			        $result = array(
+					'status' => "0",
+					'pesan' => "ada kesalahan sistem server"
+				);
+				echo json_encode($result);
+
+		    } else {
+		    	$this->db->trans_commit();
+
+		    	// push notifikasi ke driver
+				$server_key = get_setting('server_fcm_driver');
+				$token = get_data('users','id_user',$driver,'token_fcm');
+				$title = "Ada Order Masuk";
+				$body = "Hai Driver, ambil order kamu sekarang";
+				$screen ="list_trx";
+				$hasil = $this->send_notif($server_key,$token,$title, $body, $screen);
+				$result = json_decode($hasil);
+				// batas notifikasi
+			
+
+		    	$result = array(
 					'status' => "1",
 					'pesan' => "driver untukmu sudah ditemukan",
 					'jarak_driver' => $jarak_driver
 				);
 				echo json_encode($result);
-			} else {
-				$result = array(
-					'status' => "0",
-					'pesan' => "driver tidak ditemukan atau sedang tidak bekerja"
-				);
-				echo json_encode($result);
-			}
+		    }
 
 
 
