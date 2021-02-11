@@ -681,7 +681,6 @@ class Api_kurir extends CI_Controller {
 				'lat'=>$lat,
 				'lng'=>$lng,
 				'bearing'=>$bearing,
-				'status_online' => '1'
 			));
 			if ($update) {
 				echo json_encode(array(
