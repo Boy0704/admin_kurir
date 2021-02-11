@@ -378,6 +378,22 @@ class Api_kurir extends CI_Controller {
 		}
 	}
 
+	public function set_on_off()
+	{
+		if ($_POST) {
+			$status = $this->input->post('status');
+			$id_user = $this->input->post('id_user');
+			$this->db->where('id_user', $id_user);
+			$this->db->update('data_driver', array('status_online'=>$status));
+			if ($status == '1') {
+				echo "Anda Telah On Kembali";
+			} else {
+				echo "Anda Telah Off";
+			}
+
+		}
+	}
+
 	public function set_online_driver()
 	{
 		if ($_POST) {
