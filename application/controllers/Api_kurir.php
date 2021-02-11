@@ -93,7 +93,7 @@ class Api_kurir extends CI_Controller {
 					'id_user'=>$rw->id_user,
 					'lat' => $rw->lat,
 					'lng' => $rw->lng,
-					'no_plat' => $rw->no_plat,
+					'no_plat' => $rw->no_plat." ".get_data('users','id_user',$rw->id_user,'nama_lengkap'),
 					'bearing' => $rw->bearing,
 				));
 			}
