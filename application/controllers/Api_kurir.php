@@ -576,7 +576,7 @@ class Api_kurir extends CI_Controller {
 					'jemput' => $rw->alamat_origin,
 					'antar' => $rw->alamat_destination,
 					'no_plat' => get_data('data_driver','id_user',$rw->driver,'no_plat'),
-					'nama_driver' => get_data('users','id_user',$rw->driver,'nama_lengkap'),
+					'nama_driver' => get_data('users','id_user',$rw->driver,'nama_lengkap')."\n".$rw->date_at,
 					'ongkos' => "Rp. ".number_format($rw->harga),
 					'status' => $status
 				));
@@ -648,8 +648,8 @@ class Api_kurir extends CI_Controller {
 				array_push($result, array(
 					'id_order' => $rw->id_order,
 					'no_trx' =>'TR'.$rw->id_order,
-					'jemput' => $rw->alamat_origin,
-					'antar' => $rw->alamat_destination,
+					'jemput' => $rw->alamat_origin."\n".$rw->date_at,
+					'antar' => $rw->alamat_destination."\n".$rw->date_at,
 					'jarak' => $rw->jarak,
 					'origin' => $rw->origin,
 					'destination' => $rw->destination,
