@@ -668,6 +668,7 @@ class Api_kurir extends CI_Controller {
 					'nama_pengirim' => $rw->nama_pengirim,
 					'nama_customer' => get_data('users','id_user',$rw->customer,'nama_lengkap'),
 					'ongkos' => "Rp. ".number_format($rw->harga),
+					'waktu' => $rw->date_at,
 					'status' => $status
 				));
 			}
