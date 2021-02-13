@@ -647,9 +647,9 @@ class Api_kurir extends CI_Controller {
 				}
 				array_push($result, array(
 					'id_order' => $rw->id_order,
-					'no_trx' =>'TR'.$rw->id_order,
-					'jemput' => $rw->alamat_origin."\n".$rw->date_at,
-					'antar' => $rw->alamat_destination."\n".$rw->date_at,
+					'no_trx' =>'TR'.$rw->id_order."\n".$rw->date_at,
+					'jemput' => $rw->alamat_origin,
+					'antar' => $rw->alamat_destination,
 					'jarak' => $rw->jarak,
 					'origin' => $rw->origin,
 					'destination' => $rw->destination,
