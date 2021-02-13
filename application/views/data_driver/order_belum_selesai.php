@@ -36,7 +36,7 @@
 		<th>Status</th>
 		<th>Id Jenis</th>
 		<th>Date At</th>
-		<!-- <th>Action</th> -->
+		<th>Action</th>
             </tr>
             </thead>
             <tbody>
