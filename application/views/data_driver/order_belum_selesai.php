@@ -15,7 +15,8 @@
             </div>
         </div>
         <div class="table-responsive">
-        <table class="table table-bordered" style="margin-bottom: 10px">
+        <table class="table table-bordered" style="margin-bottom: 10px" id="example1">
+            <thead>
             <tr>
                 <th>No</th>
                 <th>No TRX</th>
@@ -36,7 +37,10 @@
 		<th>Id Jenis</th>
 		<th>Date At</th>
 		<!-- <th>Action</th> -->
-            </tr><?php
+            </tr>
+            </thead>
+            <tbody>
+            <?php
             $start = 0;
             $this->db->where('status!=', '4');
             $this->db->where('driver', $this->uri->segment(3));
@@ -96,6 +100,7 @@
                 <?php
             }
             ?>
+            </tbody>
         </table>
         </div>
         <div class="row">
