@@ -451,6 +451,14 @@ class Api_kurir extends CI_Controller {
 			} 
 			$data_driver = $this->db->query($sql)->row();
 			$driver = $data_driver->id_user;
+			if ($data_driver->status_order == "1") {
+				$result = array(
+					'status' => "0",
+					'pesan' => "Driver sedang ada order belum selesai"
+				);
+				echo json_encode($result);
+				exit();
+			} 
 			$jarak_driver = $data_driver->distance;
 			$data = array(
 				'customer' => $customer,
