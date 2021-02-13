@@ -449,9 +449,23 @@ class Api_kurir extends CI_Controller {
 				echo json_encode($result);
 				exit();
 			} 
+			
 			$data_driver = $this->db->query($sql)->row();
 			$driver = $data_driver->id_user;
-			if ($data_driver->status_order == "1") {
+
+			//cek orderan yang belum selesai
+			$cek_order = $this->db->query("
+				SELECT
+					a.driver,
+					a.STATUS 
+				FROM
+					`order` a
+					AND a.driver = '$driver' 
+					AND a.STATUS != '3' 
+					AND a.STATUS != '4'
+
+				");
+			if ($cek_order->num_rows() > 0) {
 				$result = array(
 					'status' => "0",
 					'pesan' => "Driver sedang ada order belum selesai"
