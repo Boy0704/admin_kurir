@@ -460,7 +460,7 @@ class Api_kurir extends CI_Controller {
 					a.STATUS 
 				FROM
 					`order` a
-					AND a.driver = '$driver' 
+					WHERE a.driver = $driver
 					AND a.STATUS != '3' 
 					AND a.STATUS != '4'
 
