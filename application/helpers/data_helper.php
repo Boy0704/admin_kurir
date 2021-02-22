@@ -2,7 +2,7 @@
 
 function get_waktu()
 {
-	date_default_timezone_set('Asia/Jakarta');
+	date_default_timezone_set('Asia/Makassar');
 	return date('Y-m-d H:i:s');
 }
 function select_option($name, $table, $field, $pk, $selected = null,$class = null, $extra = null, $option_tamabahan = null) {

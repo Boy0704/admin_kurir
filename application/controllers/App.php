@@ -28,6 +28,26 @@ class App extends CI_Controller {
 		$this->load->view('v_index', $data);
     }
 
+    public function reset_pass()
+    {
+        if ($_POST) {
+            $username = $this->input->post('username');
+            $this->db->where('username', $username);
+            $cek = $this->db->get('users');
+            if ($cek->num_rows() > 0) {
+                $this->db->where('username', $username);
+                $this->db->update('users', array('password'=>'123456'));
+                $this->session->set_flashdata('message', alert_biasa('Password berhasil di reset 123456 di akun '.$username.', silahkan ubah password di menu profil anda ','success'));
+                redirect('login','refresh');
+            } else {
+                $this->session->set_flashdata('message', alert_biasa('akun '.$username.' tidak di temukan, silahkan cek kembali username anda ','warning'));
+                redirect('login','refresh');
+            }
+        } else {
+            $this->load->view('reset_pass');
+        }
+    }
+
     public function lokasi_driver()
     {
         $this->load->view('data_driver/lokasi_driver');

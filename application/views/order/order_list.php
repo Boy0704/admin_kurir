@@ -2,6 +2,7 @@
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <!-- <?php echo anchor(site_url('order/create'),'Create', 'class="btn btn-primary"'); ?> -->
+                <a href="order/rekap_excel" class="btn btn-primary"><i class="fa fa-print"></i> Backup excel</a>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -50,7 +51,7 @@
 		<th>Status</th>
 		<th>Id Jenis</th>
 		<th>Date At</th>
-		<!-- <th>Action</th> -->
+		<th>Action</th>
             </tr><?php
             foreach ($order_data as $order)
             {
@@ -90,13 +91,13 @@
             </td>
 			<td><?php echo $data_jenis['jenis_layanan'] ?></td>
 			<td><?php echo $order->date_at ?></td>
-			<!-- <td style="text-align:center" width="200px">
+			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('order/update/'.$order->id_order),'<span class="label label-info">Ubah</span>'); 
-				echo ' | '; 
+				// echo anchor(site_url('order/update/'.$order->id_order),'<span class="label label-info">Ubah</span>'); 
+				// echo ' | '; 
 				echo anchor(site_url('order/delete/'.$order->id_order),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
-			</td> -->
+			</td>
 		</tr>
                 <?php
             }

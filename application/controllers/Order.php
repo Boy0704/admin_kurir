@@ -21,6 +21,11 @@ class Order extends CI_Controller
         $this->load->view('v_index', $data);
     }
 
+    public function rekap_excel()
+    {
+        $this->load->view('cetak/rekap_order_kirim_paket');
+    }
+
     public function cancel_order($id_order,$driver)
     {
         $this->db->where('id_order', $id_order);

@@ -72,6 +72,9 @@
                                     </div>
                                     <button id="btnLogin" class="btn">LOGIN!</button>
                                 </form>
+                                <p>
+                                    <a href="app/reset_pass" class="label label-info">Lupa password ?</a>
+                                </p>
                             </div>
                         </div>
                     </div>
