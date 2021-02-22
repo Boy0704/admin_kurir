@@ -33,7 +33,6 @@ header("Content-Disposition: attachment; filename=Backup Order.xls");
 		<!-- <th>Action</th> -->
             </tr><?php
             $start = 1;
-            $order_data = $this->db->get('order');
             foreach ($order_data->result() as $order)
             {
                 $data_user=$this->db->query("select nama_lengkap from users where id_user='$order->customer'")->row_array();

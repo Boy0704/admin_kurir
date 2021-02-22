@@ -31,8 +31,12 @@
             </div>
         </div>
         <div class="table-responsive">
+        <form action="order/delete_multi" method="POST" name="postform" enctype="multipart/form-data">
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
+                <th>
+                    #
+                </th>
                 <th>No</th>
         <th>No Trx</th>
 		<th>Customer</th>
@@ -60,6 +64,9 @@
                 $data_jenis=$this->db->query("select jenis_layanan from jenis_layanan where id_jenis='$order->id_jenis'")->row_array();
                 ?>
                 <tr>
+            <td>
+                 <input type="checkbox" name="pilih[]" value="<?php echo $order->id_order ?>">
+            </td>
 			<td width="80px"><?php echo ++$start ?></td>
             <td><?php echo "TR".$order->id_order ?></td>
 			<td><?php echo $data_user['nama_lengkap'] ?></td>
@@ -103,6 +110,12 @@
             }
             ?>
         </table>
+        <div style="font-weight:bold;">
+            <span style="float:left;">
+                <input type="submit" name="hapus" value="Hapus Multiple" onclick="return confirm('Are you sure you want to delete == Multiple Data Check == from Database?');">
+            </span>
+        </div>
+        </form>
         </div>
         <div class="row">
             <div class="col-md-6">

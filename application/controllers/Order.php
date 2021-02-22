@@ -21,9 +21,52 @@ class Order extends CI_Controller
         $this->load->view('v_index', $data);
     }
 
+    public function delete_multi()
+    {
+        if (empty($_POST['pilih'])) {
+            ?>
+                <script language="JavaScript">
+                    alert('Oops! Data tidak terpilih...');
+                    document.location='<?php echo base_url() ?>order';
+                </script>
+            <?php
+        }
+        else {
+            $id            =$_POST['pilih'];
+            $jml_pilih    =count($id);
+            
+            for($x=0;$x<$jml_pilih;$x++){
+                $hapus=mysql_query("DELETE FROM order WHERE id_order='$id[$x]'");
+            }
+            if ($hapus) {        
+                ?>
+                    <script language="JavaScript">
+                    alert('Data order berhasil dihapus...');
+                    document.location='<?php echo base_url() ?>order';
+                    </script>
+                <?php        
+            } 
+            else{
+                echo "Oops! Error 404...";
+            }
+        }
+    }
+
     public function rekap_excel()
     {
-        $this->load->view('cetak/rekap_order_kirim_paket');
+        if ($_POST) {
+            $tgl1 = $this->input->post('tgl1').' 00:00:00';
+            $tgl2 = $this->input->post('tgl2').' 23:59:59';
+
+            $data['order_data'] = $this->db->query("SELECT * FROM `order` WHERE date_at BETWEEN '$tgl1' AND '$tgl2' ");
+            $this->load->view('cetak/rekap_order_kirim_paket');
+        } else {
+            $data = array(
+                'judul_page' => 'Cetak',
+                'konten' => 'cetak/pilih_cetak',
+            );
+            $this->load->view('v_index', $data);
+        }
     }
 
     public function cancel_order($id_order,$driver)
