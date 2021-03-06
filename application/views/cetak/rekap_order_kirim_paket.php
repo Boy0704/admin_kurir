@@ -10,7 +10,7 @@ header("Content-Disposition: attachment; filename=Backup Order.xls");
 </head>
 <body>
 
-<table class="table table-bordered" style="margin-bottom: 10px">
+<table class="table table-bordered" border="1" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
         <th>No Trx</th>
