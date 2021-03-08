@@ -8,6 +8,6 @@
 		<input type="date" name="tgl2" class="form-control">
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Cetak</button>
+		<button type="submit" class="btn btn-primary">Download</button>
 	</div>
 </form>

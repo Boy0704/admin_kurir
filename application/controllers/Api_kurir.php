@@ -790,7 +790,18 @@ class Api_kurir extends CI_Controller {
 			$nama = $this->input->post('nama');
 			$email = $this->input->post('email');
 			$no_telp = $this->input->post('no_telp');
-			$password = $this->input->post('password');
+			$password_lama = $this->input->post('password_lama');
+			$password = $this->input->post('password_baru');
+
+			$this->db->where('id_user', $id_user);
+			$this->db->where('password', $password_lama);
+			if ($this->db->get('users')->num_rows() == 0) {
+				echo json_encode(array(
+					'status' => '0',
+					'pesan' => 'Password lama anda tidak cocok !',
+				));
+				exit();
+			}
 
 			$data = array();
 
