@@ -59,7 +59,7 @@ class Order extends CI_Controller
             $tgl2 = $this->input->post('tgl2').' 23:59:59';
 
             $data['order_data'] = $this->db->query("SELECT * FROM `order` WHERE date_at BETWEEN '$tgl1' AND '$tgl2' ");
-            $this->load->view('cetak/rekap_order_kirim_paket');
+            $this->load->view('cetak/rekap_order_kirim_paket', $data);
         } else {
             $data = array(
                 'judul_page' => 'Cetak',
